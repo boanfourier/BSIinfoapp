@@ -1,4 +1,5 @@
 Imports ConsoleApp1
+Imports DAL.ConsoleApp1
 
 Module Program
     Sub Main()
