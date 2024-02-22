@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>DAL</RootNamespace>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BSI_info.BO\BSI_info.BO.vbproj" />
+    <ProjectReference Include="..\INTERFACE1\INTERFACE1.vbproj" />
+  </ItemGroup>
+
+</Project>
