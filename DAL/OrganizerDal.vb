@@ -2,10 +2,13 @@ Imports System
 Imports System.Collections.Generic
 Imports System.Data.SqlClient
 Imports BSI_info.BO.ConsoleApp1
+Imports MyInterface
+
+
 
 Namespace ConsoleApp1
-
     Public Class OrganizerDal
+        Implements IOrganizers
         Private Const strConn As String = "Server=.\SQLEXPRESS02;Database=BSI_info;Trusted_Connection=True;"
         Private conn As SqlConnection
         Private cmd As SqlCommand
@@ -15,9 +18,8 @@ Namespace ConsoleApp1
             conn = New SqlConnection(strConn)
         End Sub
 
-        Public Function GetAll() As IEnumerable(Of Organizer)
+        Public Function GetAll() As List(Of Organizer) Implements IOrganizers.GetAllOrganizer
             Dim organizers As New List(Of Organizer)()
-
             Using conn As New SqlConnection(strConn)
                 Dim strSql As String = "SELECT * FROM Organizers ORDER BY Name"
                 Using cmd As New SqlCommand(strSql, conn)
@@ -43,19 +45,19 @@ Namespace ConsoleApp1
             Return organizers
         End Function
 
-        Public Sub AddOrganizer(name As String, email As String, phone As String)
+        Public Sub AddOrganizer(ByVal organizer As Organizer) Implements IOrganizers.AddOrganizer
             Using conn As New SqlConnection(strConn)
                 conn.Open()
 
                 Dim strSql As String = "INSERT INTO Organizers (name, email, phone) VALUES (@name, @email, @phone)"
                 Using cmd As New SqlCommand(strSql, conn)
-                    cmd.Parameters.AddWithValue("@name", name)
-                    cmd.Parameters.AddWithValue("@email", email)
-                    cmd.Parameters.AddWithValue("@phone", phone)
-
+                    cmd.Parameters.AddWithValue("@name", organizer.name)
+                    cmd.Parameters.AddWithValue("@email", organizer.email)
+                    cmd.Parameters.AddWithValue("@phone", organizer.phone)
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
         End Sub
+
     End Class
 End Namespace

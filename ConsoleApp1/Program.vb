@@ -1,18 +1,21 @@
+Imports BSI_info.BO.ConsoleApp1
 Imports ConsoleApp1
 Imports DAL.ConsoleApp1
 
 Module Program
     Sub Main()
         Dim dal As New OrganizerDal()
-
         ' Menambahkan data organizer baru '
-        dal.AddOrganizer("Foto Studio Bersama Pelix", "john.pelix@example.com", "081234567897")
+        Dim newOrganizer As New Organizer()
+        newOrganizer.name = "Pelixz"
+        newOrganizer.email = "john.pelix@example.com"
+        newOrganizer.phone = "081234567897"
+        dal.AddOrganizer(newOrganizer.name, newOrganizer.email, newOrganizer.phone)
 
         ' Menampilkan data menggunakan GetAll() '
         Dim organizers = dal.GetAll()
-        For Each organizer In organizers
-            Console.WriteLine($"{organizer.organizer_id} lives in {organizer.name}, {organizer.email}, {organizer.phone}")
+        For Each org In organizers
+            Console.WriteLine($"{org.organizer_id} lives in {org.name}, {org.email}, {org.phone}")
         Next
     End Sub
 End Module
-
