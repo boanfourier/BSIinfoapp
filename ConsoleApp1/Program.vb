@@ -10,7 +10,7 @@ Module Program
         newOrganizer.name = "Pelixz"
         newOrganizer.email = "john.pelix@example.com"
         newOrganizer.phone = "081234567897"
-        dal.AddOrganizer(newOrganizer.name, newOrganizer.email, newOrganizer.phone)
+        dal.AddOrganizer(newOrganizer)
 
         ' Menampilkan data menggunakan GetAll() '
         Dim organizers = dal.GetAll()

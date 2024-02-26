@@ -1,14 +1,15 @@
 Imports System
 Imports System.Collections.Generic
 Imports System.Data.SqlClient
+Imports System.Reflection.Metadata
 Imports BSI_info.BO.ConsoleApp1
-Imports MyInterface
+Imports [Interface]
 
 
 
 Namespace ConsoleApp1
     Public Class OrganizerDal
-        Implements IOrganizers
+        Implements NewInterface
         Private Const strConn As String = "Server=.\SQLEXPRESS02;Database=BSI_info;Trusted_Connection=True;"
         Private conn As SqlConnection
         Private cmd As SqlCommand
@@ -18,7 +19,7 @@ Namespace ConsoleApp1
             conn = New SqlConnection(strConn)
         End Sub
 
-        Public Function GetAll() As List(Of Organizer) Implements IOrganizers.GetAllOrganizer
+        Public Function GetAll() As List(Of Organizer) Implements NewInterface.GetAllOrganizer
             Dim organizers As New List(Of Organizer)()
             Using conn As New SqlConnection(strConn)
                 Dim strSql As String = "SELECT * FROM Organizers ORDER BY Name"
@@ -45,10 +46,9 @@ Namespace ConsoleApp1
             Return organizers
         End Function
 
-        Public Sub AddOrganizer(ByVal organizer As Organizer) Implements IOrganizers.AddOrganizer
+        Public Sub AddOrganizer(ByVal organizer As Organizer) Implements NewInterface.AddOrganizer
             Using conn As New SqlConnection(strConn)
                 conn.Open()
-
                 Dim strSql As String = "INSERT INTO Organizers (name, email, phone) VALUES (@name, @email, @phone)"
                 Using cmd As New SqlCommand(strSql, conn)
                     cmd.Parameters.AddWithValue("@name", organizer.name)
@@ -58,6 +58,5 @@ Namespace ConsoleApp1
                 End Using
             End Using
         End Sub
-
     End Class
 End Namespace

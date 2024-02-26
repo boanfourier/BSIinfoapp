@@ -3,6 +3,8 @@
   <PropertyGroup>
     <RootNamespace>DAL</RootNamespace>
     <TargetFramework>net8.0</TargetFramework>
+    <OptionStrict>On</OptionStrict>
+    <ImportedNamespaces>BSI_info.BO.ConsoleApp1=False,DAL.ConsoleApp1=False,DAL.My=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,DAL=True</ImportedNamespaces>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +13,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BSI_info.BO\BSI_info.BO.vbproj" />
-    <ProjectReference Include="..\ConsoleApp1\ConsoleApp1.vbproj" />
-	<ProjectReference Include="..\MyInterface\MyInterface.vbproj" />
+    <ProjectReference Include="..\Interface\NewInterface.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="BSI_info.BO.ConsoleApp1" />
+    <Import Include="DAL.ConsoleApp1" />
+    <Import Include="DAL.My" />
   </ItemGroup>
 </Project>
